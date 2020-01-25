@@ -1,0 +1,17 @@
+import maya.cmds as cmds
+
+
+def create(geo,wireCrv,dropoffDist=30.0):
+	# Create Wire
+	wire = cmds.wire(geo,w=wireCrv,n='_wire')
+	wireNode = wire[0]
+	
+	# Set Dropoff Distance
+	cmds.setAttr(wireNode+'.dropoffDistance[0]',dropoffDist)
+	
+    
+cmds.select("pipe001") #or anygeometry you have in the scene
+wireOBJ=cmds.ls(sl=True, o=True)[0]
+cmds.select("Curve001") #or any curve you have in the scene
+wireCurve=cmds.ls(sl=True, o=True)[0]
+create(wireOBJ,wireCurve,35)
